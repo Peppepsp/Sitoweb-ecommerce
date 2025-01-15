@@ -1,0 +1,44 @@
+Create database Logicsystem;
+
+Use Logicsystem;
+
+CREATE TABLE Prodotti(
+ID_Prodotto int auto_increment primary key,
+Marca char(20) not null,
+Modello char(20) not null,
+Disponibile int not null,
+Prezzo char(10) not null);
+
+CREATE TABLE Utenti(
+ID_Utente int auto_increment primary key,
+Nome char(20) not null,
+Cognome char(20) not null,
+Indirizzo char(30) not null,
+Email char(40) not null,
+Pass char(100) not null,
+MetodoPag char(20) not null);
+
+CREATE TABLE Ordini(
+ID_Ordine int auto_increment primary key,
+MetodoPag char(20) not null,
+Quantita int not null,
+PrezzoTotale int not null,
+ID_Carrello int not null,
+Comprato BOOL not null,
+ID_Utente int,
+ID_Prodotto int,
+FOREIGN KEY (ID_Utente) references Utenti(ID_Utente),
+FOREIGN KEY (ID_Prodotto) references Prodotti(ID_Prodotto)
+On Delete set null
+On Update cascade);
+
+INSERT INTO Prodotti(Marca,Modello,Disponibile,Prezzo) 
+VALUES ('Apple','MacBook Pro',100,'1000'),
+('Sony','PlayStation 5',30,'500'),
+('Nokia','3310',1000,'33.50'),
+('Samsung','Galaxy S22 Ultra',100,'1200'),
+('Oppo','FindX',100,'500'),
+('Sony','PlayStation 4',100,'300'),
+('Apple','iPhone 13',100,'1200'),
+('Samsung','Galaxy S22',100,'900');
+
